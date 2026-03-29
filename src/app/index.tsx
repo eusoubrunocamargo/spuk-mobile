@@ -1,9 +1,11 @@
-import { Text, View } from "react-native";
+import SwipeScreen from "@/components/SwipeScreen";
+import { Stack } from "expo-router";
 
-export default function HomeScreen() {
+export default function Page() {
   return (
-    <View className="flex-1 items-center justify-center bg-[#F0EBE1]">
-      <Text className="text-[#1A1A1A] text-xl font-bold">SPUK</Text>
-    </View>
+    <>
+      <Stack.Screen options={{ headerShown: false }} />
+      <SwipeScreen />
+    </>
   );
 }
