@@ -7,6 +7,7 @@ import { montarDeck } from "../data/deckUtils";
 import { mockCards } from "../data/mockCards";
 import { SpukCardApresentado } from "../data/types";
 
+import EmptyState from "./EmptyState";
 import FeedbackError from "./FeedbackError";
 import FeedbackSuccess from "./FeedbackSuccess";
 import ProgressBar from "./ProgressBar";
@@ -48,8 +49,18 @@ export default function SwipeScreen() {
   if (!cardAtual) {
     return (
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <SafeAreaView style={[styles.safe, { backgroundColor: bgColor }]} />
-      </GestureHandlerRootView>
+      <SafeAreaView style={[styles.safe, { backgroundColor: bgColor }]}>
+        <EmptyState
+          onContinuar={() => {
+            setIndice(0);
+            setFase("card");
+          }}
+          onMenuInicial={() => {
+            // navegação para o menu — a implementar
+          }}
+        />
+      </SafeAreaView>
+    </GestureHandlerRootView>
     );
   }
 
