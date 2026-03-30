@@ -10,6 +10,8 @@ import { SpukCardApresentado } from "../data/types";
 import FeedbackError from "./FeedbackError";
 import FeedbackSuccess from "./FeedbackSuccess";
 import ProgressBar from "./ProgressBar";
+import StatsButton from "./StatsButton";
+import StatsSheet from "./StatsSheet";
 import SwipeCard from "./SwipeCard";
 import SwipeHeader from "./SwipeHeader";
 
@@ -23,6 +25,8 @@ export default function SwipeScreen() {
   const deck = useMemo(() => montarDeck(mockCards), []);
   const [indice, setIndice] = useState(0);
   const [fase, setFase] = useState<Fase>("card");
+
+  const [statsVisible, setStatsVisible] = useState(false);
 
   const cardAtual: SpukCardApresentado | null = deck[indice] ?? null;
 
@@ -78,8 +82,12 @@ export default function SwipeScreen() {
             />
           )}
 
-          <ProgressBar total={deck.length} atual={indice} />
+          <View style={styles.bottomBar}>
+            <ProgressBar total={deck.length} atual={indice} />
+            <StatsButton onPress={() => setStatsVisible(true)} />
+          </View>
         </View>
+        <StatsSheet visible={statsVisible} onClose={() => setStatsVisible(false)} />
       </SafeAreaView>
     </GestureHandlerRootView>
   );
@@ -97,5 +105,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     paddingHorizontal: 36,
+  },
+  bottomBar: {
+    alignItems: "center",
+    paddingBottom: 24,
+    gap: 8,
   },
 });
